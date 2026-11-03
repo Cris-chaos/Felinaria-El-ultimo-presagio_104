@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const RecipeCard = ({receta}) => {
     const {idMeal, strMeal, strMealThumb} = receta;
+      const navigate = useNavigate();
 
     return (
         <div className='card'>
@@ -12,9 +14,9 @@ const RecipeCard = ({receta}) => {
 
            <div className='card-body'>
             <h3>{strMeal}</h3>
-            <Link to={`/instrucciones/${idMeal}`} className="boton-realizar">
-              Realizar!
-            </Link>
+             <button onClick={() => navigate(`/instrucciones/${idMeal}`)}>
+                Realizar!!
+             </button>
            </div>
         </div>
     )

@@ -64,3 +64,10 @@
     border-radius: 10px;
     text-decoration: none;
    }
+
+   button{
+    background-color: palevioletred;
+    color: inherit;
+    padding: 10px;
+    border-radius: 10px;
+   }

@@ -6,9 +6,7 @@ const recetas = [
     id: 1,
     nombre: 'PIZZA',
     tiempo: '1h 30 min',
-    dificultad: 'Media',
     imagen: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600',
-    categoria: 'Italiana',
     ingredientes: ['Harina 500 gr', 'Sal 10 gr', 'Levadura en polvo 1 sobre', 'Azúcar 3 gr',
     'Aceite de olivo 40 gr', 'Agua 300 ml', 'Salsa de tomate preparada 200 gr', 'Tomates cherry 1 caja',
     'Queso mozzarella rallado 400 gr', 'Hojas de albahaca fresca 1 manojo'],
@@ -26,9 +24,7 @@ const recetas = [
     id: 2,
     nombre: 'TARTA DE FRUTOS ROJOS',
     tiempo: '1h 30 min',
-    dificultad: 'Media',
     imagen: 'https://www.sortirambnens.com/wp-content/uploads/2019/12/pasti%CC%81s-de-fruits-vermells.png',
-    categoria: 'Italiana',
     ingredientes: ['200 gr de harina','125 gr de mantequilla fría','100 gr de azúcar','2 yemas',
 'Un poco de sal.', '700 gr de frutos rojos: frambuesas, arándanos y moras', 
 '1 taza de azúcar', '1 cucharada de limón','4 cucharadas de almidón','2 cucharadas de mantequilla',
@@ -47,57 +43,38 @@ const recetas = [
 ]
 
 function Instrucciones() {
-  const { id } = useParams()
+  const { idMeal } = useParams();
 
-  // Busca la receta
-  const receta = recetas.find(r => r.id === Number(id))
+  const receta = recetas.find(r => r.id === Number(idMeal));
 
-  // Si no la encuentra, muestra el error
-  if (!receta) {
-    return <h2 style={{ textAlign: 'center', marginTop: '50px' }}>Error!</h2>
-  }
-
-  // 👇 ¡ESTO ES LO QUE FALTABA! El return con el HTML
   return (
-    <div className="pagina-scrapbook">
-      <main className="hoja-cuaderno">
-        <div className="receta-scrapbook">
-          
-          <div className="titulo-con-cinta">
-            <h1>{receta.nombre}</h1>
-          </div>
+    <div>
+        <div className="contenedor">
 
-          <div className="contenido-receta">
-            <div className="foto-polaroid">
-              <img src={receta.imagen} alt={receta.nombre} />
-            </div>
+      <Link to="/">Volver al recetario</Link>
 
-            <div className="nota-pegada ingredientes">
-              <h2>Ingredientes:</h2>
-              <ul>
-                {receta.ingredientes.map((ing, i) => (
-                  <li key={i}>{ing}</li>
-                ))}
-              </ul>
-            </div>
+      <h1>{receta.nombre}</h1>
 
-            <div className="nota-pegada preparacion">
-              <h2>Preparación:</h2>
-              <ol>
-                {receta.pasos.map((paso, i) => (
-                  <li key={i}>{paso}</li>
-                ))}
-              </ol>
-            </div>
-          </div>
+      <p>Tiempo: {receta.tiempo}</p>
 
-          <Link to="/" className="btn-siguiente">
-            ⤶ Volver al inicio
-          </Link>
-        </div>
-      </main>
+      <h2>Ingredientes</h2>
+
+      <ul>
+        {receta.ingredientes.map((ingrediente, index) => (
+          <li key={index}>{ingrediente}</li>
+        ))}
+      </ul>
+
+      <h2>Preparación</h2>
+
+      <ol>
+        {receta.pasos.map((paso, index) => (
+          <li key={index}>{paso}</li>
+        ))}
+      </ol>
+</div>
     </div>
-  )
-}
+  );
 
-export default Instrucciones
+} 
+export default Instrucciones;
